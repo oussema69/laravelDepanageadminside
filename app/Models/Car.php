@@ -5,22 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model
+class Car extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nom',
-        'prenom',
-        'email',
-        'password',
+        'marque',
+        'modele',
         'matricule',
         'num_assurance',
-        'tel',
+        'date_payment_assurance',
+        'date_fin',
+        'client_id',
     ];
 
-    public function cars()
+    public function client()
     {
-        return $this->hasMany(Car::class);
+        return $this->belongsTo(Client::class,  'client_id');
     }
 }

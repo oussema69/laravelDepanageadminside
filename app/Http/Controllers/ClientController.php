@@ -28,6 +28,13 @@ class ClientController extends Controller
 
 
 
+public function showCars($id)
+{
+    $client = Client::with('cars:id,marque,modele,matricule,num_assurance,date_payment_assurance,date_fin,client_id')->findOrFail($id);
+    $cars = $client->cars;
+    return view('clients.cars', compact('client', 'cars'));
+}
+
     public function create()
     {
         return view('clients.create');
@@ -47,7 +54,6 @@ class ClientController extends Controller
             ]);
         } catch (ValidationException $exception) {
             return redirect()->back()->withErrors($exception->validator->getMessageBag());
-            echo"non";
         }
 
         $client = new Client([

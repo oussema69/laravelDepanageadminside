@@ -32,6 +32,7 @@
                             <th>Numéro d'assurance</th>
                             <th>Téléphone</th>
                             <th>Actions</th>
+                            <th>View Cars</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,8 +53,12 @@
                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this client?')"><i class="fa-sharp fa-solid fa-trash"></i></button>
                                 </form>
                             </td>
+                            <td>
+                                <a href="{{ route('clients.cars', ['id' => $client->id]) }}" class="btn btn-primary"><i class="fa-sharp fa-solid fa-car"></i></a>
+                            </td>
                         </tr>
                         @endforeach
+
                     </tbody>
                 </table>
                 @if(isset($searchTerm))
