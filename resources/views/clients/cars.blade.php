@@ -32,6 +32,7 @@
                                         <a href="{{ route('cars.show', ['car' => $car->id]) }}" class="btn btn-primary"><i class="fa-sharp fa-solid fa-car"></i></a>
 
                                         <a href="{{ route('cars.edit', ['car' => $car->id]) }}" class="btn btn-success"><i class="fa-sharp fa-solid fa-pencil"></i></a>
+                                        <a href="{{ route('cars.trucks', ['car' => $car->id]) }}" class="btn btn-info"><i class="fa-sharp fa-solid fa-truck"></i></a>
 
                                         <form action="{{ route('cars.destroy', ['car' => $car->id]) }}" method="POST"
                                             style="display: inline-block;">

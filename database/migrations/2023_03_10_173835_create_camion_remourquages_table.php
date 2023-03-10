@@ -38,6 +38,23 @@ return new class extends Migration
             $table->foreign('client_id')->references('id')->on('clients');
             $table->timestamps();
         });
+
+        Schema::create('camion_remourquage', function (Blueprint $table) {
+            $table->id();
+            $table->string('matricule')->unique();
+            $table->string('model');
+            $table->string('etat');
+            $table->timestamps();
+        });
+
+        Schema::create('camion_remourquage_car', function (Blueprint $table) {
+            $table->unsignedBigInteger('camion_remourquage_id');
+            $table->unsignedBigInteger('car_id');
+            $table->foreign('camion_remourquage_id')->references('id')->on('camion_remourquage')->onDelete('cascade');
+            $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');
+            $table->primary(['camion_remourquage_id', 'car_id']);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -47,9 +64,14 @@ return new class extends Migration
      */
     public function down()
     {
-
+        Schema::table('cars', function (Blueprint $table) {
+            $table->dropForeign(['client_id']);
+        });
         Schema::dropIfExists('clients');
         Schema::dropIfExists('cars');
+        Schema::dropIfExists('camion_remourquage');
+        Schema::dropIfExists('camion_remourquage_car');
+
 
     }
 };

@@ -51,26 +51,29 @@ class CarController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(Request $request, $clientId)
     {
         try {
             $validatedData = $request->validate([
                 'marque' => 'required|string|max:255',
                 'modele' => 'required|string|max:255',
-                'matricule' => 'required|string|max:255',
+                'matricule' => 'required|string|unique:cars|max:255',
                 'num_assurance' => 'required|string|max:255',
                 'date_payment_assurance' => 'required|date',
                 'date_fin' => 'required|date|after:date_payment_assurance',
             ]);
-    
-            $client = new Client($validatedData);
-            $client->save();
-    
-            return redirect()->route('clients.cars', ['id' => $client->id])->with('success', 'Client has been added successfully!');
+
+            $car = new Car($validatedData);
+            $car->client_id = $clientId; // Set the client ID for the car
+
+            $car->save();
+
+            return redirect()->route('clients.cars', ['id' => $clientId])->with('success', 'Car has been added successfully!');
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors());
         }
     }
+
 
 
 }

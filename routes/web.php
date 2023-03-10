@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CarController;
-
+use App\Http\Controllers\TruckController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,6 +37,22 @@ Route::middleware(['web'])->group(function () {
     Route::put('/cars/{car}', [CarController::class, 'update'])->name('cars.update');
     Route::post('/clients/{client}/cars', [CarController::class, 'store'])->name('cars.store');
     Route::get('/clients/{client}/cars/create', [CarController::class, 'create'])->name('cars.create');
+    Route::get('/cars/{car}/trucks',  [TruckController::class, 'index'])->name('cars.trucks');
+    Route::get('/trucks/{truck}',[TruckController::class, 'show'] )->name('trucks.show');
+    Route::get('/trucks/{truck}/edit',[TruckController::class, 'edit'] )->name('trucks.edit');
+    Route::put('/trucks/{truck}', [TruckController::class, 'update'])->name('trucks.update');
+    Route::get('/cars/{car}/trucks', [TruckController::class, 'index'])->name('trucks.update');
+
+
+
+
+   /*
+    Route::get('/trucks/{truck}', [TruckController::class, 'show'])->name('trucks.show');
+    Route::get('/trucks/{truck}/edit', [TruckController::class, 'edit'])->name('trucks.edit');
+    Route::get('/trucks/{truck}', [TruckController::class, 'show'])->name('trucks.show');
+    Route::delete('/trucks/{truck}', [TruckController::class, 'destroy'])->name('trucks.destroy');
+    Route::put('/trucks/{truck}', [TruckController::class, 'update'])->name('trucks.update');*/
+    
 
 
 
