@@ -40,9 +40,16 @@ Route::middleware(['web'])->group(function () {
     Route::get('/cars/{car}/trucks',  [TruckController::class, 'index'])->name('cars.trucks');
     Route::get('/trucks/{truck}',[TruckController::class, 'show'] )->name('trucks.show');
     Route::get('/trucks/{truck}/edit',[TruckController::class, 'edit'] )->name('trucks.edit');
+    Route::get('/cars/{car}/trucks', [TruckController::class, 'index'])->name('cars.trucks');
     Route::put('/trucks/{truck}', [TruckController::class, 'update'])->name('trucks.update');
-    Route::get('/cars/{car}/trucks', [TruckController::class, 'index'])->name('trucks.update');
 
+    Route::delete('/trucks/{truck}', [TruckController::class, 'destroy'])->name('trucks.destroy');
+    Route::get('/trucks', [TruckController::class, 'view'])->name('trucks.view');
+    Route::post('/trucks', [TruckController::class, 'store'])->name('trucks.store');
+    Route::get('/trucks/{truck}/cars', [TruckController::class, 'showCars'])->name('trucks.cars');
+    Route::get('/cars/{car}/clients', [CarController::class, 'showClients'])->name('cars.clients.show');
+    Route::get('/camion/search',  [TruckController::class, 'search'])->name('camion.search');
+    Route::get('/cam', [TruckController::class, 'create'])->name('cam');
 
 
 
@@ -52,11 +59,10 @@ Route::middleware(['web'])->group(function () {
     Route::get('/trucks/{truck}', [TruckController::class, 'show'])->name('trucks.show');
     Route::delete('/trucks/{truck}', [TruckController::class, 'destroy'])->name('trucks.destroy');
     Route::put('/trucks/{truck}', [TruckController::class, 'update'])->name('trucks.update');*/
-    
+
 
 
 
 });
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -10,7 +10,8 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h1>Edit Car Details</h1>
+                <h1 class="text-primary text-center"><i
+                    class="fas fa-pencil fa-fw me-3"></i>Edit Car Details</h1>
                 <form action="{{ route('cars.update', ['car' => $car->id]) }}" method="POST">
                     @csrf
                     @method('PUT')

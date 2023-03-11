@@ -74,6 +74,11 @@ class CarController extends Controller
         }
     }
 
+    public function showClients(Car $car)
+    {
+        $client = $car->client;
+        return view('cars.clients.show', compact('client', 'car'));
+    }
 
 
 }

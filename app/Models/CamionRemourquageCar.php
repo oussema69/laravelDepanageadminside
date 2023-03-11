@@ -26,4 +26,8 @@ class CamionRemourquageCar extends Model
     {
         return $this->belongsTo(Car::class);
     }
+    public static function getCarsByTruckId($id)
+    {
+        return self::where('camion_remourquage_id', $id)->with('car')->get()->pluck('car');
+    }
 }

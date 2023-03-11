@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\CarController;
 use App\Models\Car;
 use App\Models\CamionRemourquage;
+use App\Models\CamionRemourquageCar;
+
 
 
 class TruckController extends Controller
@@ -41,11 +43,63 @@ public function update(Request $request, CamionRemourquage $truck)
     $truck->etat = $validatedData['etat'];
     $truck->save();
 
-    return redirect()->back()->with('message', 'IT WORKS!');
+
+    return redirect()->back()->with('message', 'successfully updated')->with('duration', '10000');
 
 }
- 
-    
-    
+public function destroy(CamionRemourquage $truck)
+{
+    $truck->delete();
+
+    return redirect()->back()->with('message', 'Truck deleted successfully!');
+}
+public function view()
+{
+    $trucks = CamionRemourquage::all();
+
+    return view('trucks.view', compact('trucks'));
+}
+public function create()
+{
+    return view('trucks.create');
+}
+
+
+public function store(Request $request)
+{
+    $request->validate([
+        'matricule' => 'required|unique:camion_remourquage',
+        'model' => 'required',
+        'etat' => 'required',
+    ]);
+
+    $truck = new CamionRemourquage;
+    $truck->matricule = $request->matricule;
+    $truck->model = $request->model;
+    $truck->etat = $request->etat;
+    $truck->save();
+
+    return redirect()->route('trucks.view')->with('success', 'Truck created successfully!');
+}
+
+public function showCars($id)
+{
+    $truck = CamionRemourquage::findOrFail($id);
+    $cars = CamionRemourquageCar::getCarsByTruckId($id);
+
+    return view('trucks.cars', compact('cars', 'truck'));
+}
+public function search(Request $request)
+{
+    $search = $request->input('search');
+
+    $trucks = CamionRemourquage::where('matricule', 'like', "%$search%")
+                    ->orWhere('model', 'like', "%$search%")
+                    ->orWhere('etat', 'like', "%$search%")
+                    ->get();
+
+    return view('trucks.view', ['trucks' => $trucks, 'search' => $search]);
+}
+
 
 }

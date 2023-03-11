@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>{{ $car->marque }} {{ $car->modele }}</h1>
-                <table class="table">
+                <h1 class="text-primary text-center">{{ $car->marque }} {{ $car->modele }}</h1>
+                <table class="table table-striped">
                     <tbody>
                         <tr>
                             <td>Marque:</td>

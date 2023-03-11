@@ -4,9 +4,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class='text-center'>Cars List for {{ $client->nom }} {{ $client->prenom }}</h1>
-                <a href="{{ route('cars.create', ['client' => $client->id]) }}" class="btn btn-primary mb-3">Add New Car</a>
-                <table class="table">
+                <h1 class='text-center text-primary'><i
+                    class="fas fa-users fa-fw me-3"></i>Cars List for {{ $client->nom }} {{ $client->prenom }}</h1>
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>Marque</th>
@@ -16,6 +16,8 @@
                             <th>Date payment assurance</th>
                             <th>Date fin assurance</th>
                             <th>Actions</th>
+                            <th>View Trucks</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -32,7 +34,6 @@
                                         <a href="{{ route('cars.show', ['car' => $car->id]) }}" class="btn btn-primary"><i class="fa-sharp fa-solid fa-car"></i></a>
 
                                         <a href="{{ route('cars.edit', ['car' => $car->id]) }}" class="btn btn-success"><i class="fa-sharp fa-solid fa-pencil"></i></a>
-                                        <a href="{{ route('cars.trucks', ['car' => $car->id]) }}" class="btn btn-info"><i class="fa-sharp fa-solid fa-truck"></i></a>
 
                                         <form action="{{ route('cars.destroy', ['car' => $car->id]) }}" method="POST"
                                             style="display: inline-block;">
@@ -43,6 +44,10 @@
                                                     class="fa-sharp fa-solid fa-trash"></i></button>
                                         </form>
                                     </td>
+                                    <td>
+                                        <a href="{{ route('cars.trucks', ['car' => $car->id]) }}" class="btn btn-info"><i class="fa-sharp fa-solid fa-truck"></i></a>
+
+                                    </td>
                                 </tr>
                             @endforeach
                         @endif
@@ -51,6 +56,7 @@
                 </table>
             </div>
         </div>
+        <a href="{{ route('cars.create', ['client' => $client->id]) }}" class="btn btn-primary mb-3">Add New Car</a>
 
     </div>
 @endsection
